@@ -16,16 +16,14 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+package codes.patrick.refinery.test;
 
-import java.io.Serializable;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
-/**
- * An action to apply to a {@link SourceFile}. Tasks within the same {@link Step} may be executed in parallel
- * or out of order. Tasks can accept as input the {@link SourceFile}, any {@link DerivedFile}s that have been
- * created in previous {@link Step}s, and all associated {@link Metadata}.
- *
- * @author Patrick Lavigne
- */
-public interface Task extends Serializable {
+public class TestBase {
+    // Set up logging for tests
+    static {
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
+    }
 }

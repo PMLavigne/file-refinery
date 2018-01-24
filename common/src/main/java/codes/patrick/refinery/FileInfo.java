@@ -18,25 +18,26 @@
 
 package codes.patrick.refinery;
 
-import java.io.Serializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.Serializable;
 
 /**
  * Generic representation of file information
  *
  * @author Patrick Lavigne
  */
-public class FileInfo implements Serializable {
+public abstract class FileInfo implements Serializable {
     private final String id;
     private final String name;
     private final Metadata metadata;
 
-    public FileInfo(@NotNull final String id, @NotNull final String name) {
+    protected FileInfo(@NotNull final String id, @NotNull final String name) {
         this(id, name, new Metadata());
     }
 
-    public FileInfo(@NotNull final String id, @NotNull final String name, @NotNull final Metadata metadata) {
+    protected FileInfo(@NotNull final String id, @NotNull final String name, @NotNull final Metadata metadata) {
         this.id = id;
         this.name = name;
         this.metadata = metadata;
@@ -81,5 +82,15 @@ public class FileInfo implements Serializable {
     @NotNull
     public Metadata getMetadata() {
         return metadata;
+    }
+
+    /**
+     * Basic toString implementation, returns the ID and Name separated by a space
+     *
+     * @return String representation of this object
+     */
+    @NotNull
+    public String toString() {
+        return getId() + " " + getName();
     }
 }

@@ -61,10 +61,14 @@
     </build>
 
     <dependencies>
-        <!-- Jackson Core, needed for annotating types to assist serialization -->
+        <!-- Jackson Core and Annotations, needed for annotating types to assist serialization -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
 
         <!-- Apache Commons Math3, for generating random numbers -->

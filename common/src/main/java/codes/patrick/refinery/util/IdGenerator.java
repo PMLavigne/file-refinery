@@ -43,6 +43,9 @@ public class IdGenerator {
      */
     @NotNull
     public static String getIdString(final int length) {
+        if (length <= 0) {
+            return "";
+        }
         final StringBuilder sb = new StringBuilder();
         for(int pos = 0; pos < length; ++pos) {
             sb.append(ID_CHARACTER_SET[rng.nextInt(ID_CHARACTER_SET.length)]);

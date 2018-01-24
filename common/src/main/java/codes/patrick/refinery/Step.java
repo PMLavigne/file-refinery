@@ -18,20 +18,46 @@
 
 package codes.patrick.refinery;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- * A single stage of a {@link Process}. They are run serially. Within each {@link Step} is one or more {@link Task}s,
- * which may run in parallel.
+ * A single stage of a {@link Process}. They are run serially. Within each Step is one or more {@link Task}s,
+ * which may run in parallel or out of order.
  *
  * @author Patrick Lavigne
  */
-public interface Step extends Serializable {
+public class Step implements Serializable {
+    private final Set<Task> tasks;
+
     /**
-     * Get the {@link Task}s that are to be done during this {@link Step}. Tasks may be executed in parallel or out
-     * of order
-     * @return The collection of {@link Task}s that will be done for this {@link Step}
+     * Create an empty Step, without any {@link Task}s
      */
-    Collection<Task> getTasks();
+    public Step() {
+        this(null);
+    }
+
+    /**
+     * Create the Step with the given {@link Task}s. If null, create an empty Step
+     *
+     * @param tasks Collection of {@link Task}s that make up this Step, or null to create an empty Step
+     */
+    public Step(@Nullable final Collection<Task> tasks) {
+        this.tasks = tasks != null ? new CopyOnWriteArraySet<>(tasks) : new CopyOnWriteArraySet<>();
+    }
+
+    /**
+     * Get the {@link Task}s that are to be done during this Step. {@link Task}s may be executed in parallel or out
+     * of order
+     * @return The collection of {@link Task}s that will be done for this Step
+     */
+    @NotNull
+    public Set<Task> getTasks() {
+        return this.tasks;
+    }
 }
