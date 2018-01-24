@@ -19,35 +19,12 @@
 package codes.patrick.refinery;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * An ordered list of actions to perform on a {@link SourceFile}. A {@link Process} consists of one or more
- * {@link Step}s, which must be run serially
+ * A collection of metadata. Metadata can either be tied to a {@link SourceFile} or a {@link DerivedFile}
  *
  * @author Patrick Lavigne
  */
-public class Process implements Serializable {
-    private final List<Step> steps;
+public class Metadata implements Serializable {
 
-    public Process() {
-        this(null);
-    }
-
-    public Process(@Nullable final List<Step> steps) {
-        this.steps = steps != null ? new CopyOnWriteArrayList<>(steps) : new CopyOnWriteArrayList<>();
-    }
-
-    /**
-     * Retrieve the list of {@link Step}s that make up this {@link Process}
-     * @return The {@link Step}s that make up this {@link Process}
-     */
-    @NotNull
-    public List<Step> getSteps() {
-        return this.steps;
-    }
 }

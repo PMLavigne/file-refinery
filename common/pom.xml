@@ -67,6 +67,12 @@
             <artifactId>jackson-core</artifactId>
         </dependency>
 
+        <!-- Apache Commons Math3, for generating random numbers -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+        </dependency>
+
         <!-- Initialize logging backend for testing only -->
         <dependency>
             <groupId>ch.qos.logback</groupId>

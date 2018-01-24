@@ -16,22 +16,8 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+@XmlAccessorType(XmlAccessType.PROPERTY)
 package codes.patrick.refinery;
 
-import java.io.Serializable;
-import java.util.Collection;
-
-/**
- * A single stage of a {@link Process}. They are run serially. Within each {@link Step} is one or more {@link Task}s,
- * which may run in parallel.
- *
- * @author Patrick Lavigne
- */
-public interface Step extends Serializable {
-    /**
-     * Get the {@link Task}s that are to be done during this {@link Step}. Tasks may be executed in parallel or out
-     * of order
-     * @return The collection of {@link Task}s that will be done for this {@link Step}
-     */
-    Collection<Task> getTasks();
-}
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;

@@ -22,6 +22,8 @@ package codes.patrick.refinery;
  * An action to apply to a {@link SourceFile}. {@link Task}s within the same {@link Step} may be executed in parallel
  * or out of order. {@link Task}s can accept as input the {@link SourceFile}, any {@link DerivedFile}s that have been
  * created in previous {@link Step}s, and all associated {@link Metadata}.
+ *
+ * @author Patrick Lavigne
  */
 public interface Task {
 }
