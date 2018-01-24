@@ -18,12 +18,8 @@
 
 package codes.patrick.refinery;
 
-/**
- * An action to apply to a {@link SourceFile}. Tasks within the same {@link Step} may be executed in parallel
- * or out of order. Tasks can accept as input the {@link SourceFile}, any {@link DerivedFile}s that have been
- * created in previous {@link Step}s, and all associated {@link Metadata}.
- *
- * @author Patrick Lavigne
- */
-public interface Task extends RefiningComponent {
+import java.io.Serializable;
+
+public class DirectoryInfo implements Serializable {
+
 }

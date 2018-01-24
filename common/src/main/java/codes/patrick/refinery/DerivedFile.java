@@ -27,9 +27,16 @@ import org.jetbrains.annotations.NotNull;
  * @author Patrick Lavigne
  */
 public class DerivedFile extends FileInfo {
+    public DerivedFile(@NotNull String name) {
+        super(name);
+    }
 
     public DerivedFile(@NotNull String id, @NotNull String name) {
         super(id, name);
+    }
+
+    public DerivedFile(@NotNull String name, @NotNull Metadata metadata) {
+        super(name, metadata);
     }
 
     public DerivedFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {

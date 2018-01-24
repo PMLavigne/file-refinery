@@ -18,12 +18,24 @@
 
 package codes.patrick.refinery;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
+
 /**
- * An action to apply to a {@link SourceFile}. Tasks within the same {@link Step} may be executed in parallel
- * or out of order. Tasks can accept as input the {@link SourceFile}, any {@link DerivedFile}s that have been
- * created in previous {@link Step}s, and all associated {@link Metadata}.
+ * A part of the refining system itself, for example a {@link Process} or {@link Task}
  *
  * @author Patrick Lavigne
  */
-public interface Task extends RefiningComponent {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public interface RefiningComponent extends Serializable {
+    /**
+     * A unique ID that identifies this component in the refinery system.
+     *
+     * @return An ID that is unique to this component
+     * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
+     */
+    @NotNull
+    String getId();
 }

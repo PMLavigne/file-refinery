@@ -18,49 +18,30 @@
 
 package codes.patrick.refinery;
 
+import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.Serializable;
 
 /**
  * Generic representation of file information
  *
  * @author Patrick Lavigne
  */
-public abstract class FileInfo implements Serializable {
-    private final String id;
-    private final String name;
-    private final Metadata metadata;
+public abstract class FileInfo extends AbstractFilesystemObject {
+    protected FileInfo(@NotNull final String name) {
+        this(IdGenerator.getIdString(), name, new Metadata());
+    }
+
+    protected FileInfo(@NotNull final String name, @NotNull final Metadata metadata) {
+        this(IdGenerator.getIdString(), name, metadata);
+    }
 
     protected FileInfo(@NotNull final String id, @NotNull final String name) {
         this(id, name, new Metadata());
     }
 
     protected FileInfo(@NotNull final String id, @NotNull final String name, @NotNull final Metadata metadata) {
-        this.id = id;
-        this.name = name;
-        this.metadata = metadata;
-    }
-
-    /**
-     * A unique ID that identifies this file in the Refinery system. An ID corresponding to a file should remain the
-     * same through the entire refining process.
-     * @return An ID that is unique to this file
-     * @see codes.patrick.refinery.util.IdGenerator
-     */
-    @NotNull
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * The name of the file, including extension, but not including any path information
-     * @return The name of the file
-     */
-    @NotNull
-    public String getName() {
-        return name;
+        super(id, name, metadata);
     }
 
     /**
@@ -73,24 +54,5 @@ public abstract class FileInfo implements Serializable {
         final String name = getName();
         final int periodPos = name.lastIndexOf('.');
         return periodPos < 0 ? null : name.substring(periodPos+1);
-    }
-
-    /**
-     * The collection of metadata pertaining to this file
-     * @return This file's metadata
-     */
-    @NotNull
-    public Metadata getMetadata() {
-        return metadata;
-    }
-
-    /**
-     * Basic toString implementation, returns the ID and Name separated by a space
-     *
-     * @return String representation of this object
-     */
-    @NotNull
-    public String toString() {
-        return getId() + " " + getName();
     }
 }

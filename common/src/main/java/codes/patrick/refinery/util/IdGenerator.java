@@ -32,9 +32,65 @@ public class IdGenerator {
     private static final RandomGenerator rng = new SynchronizedRandomGenerator(new MersenneTwister());
 
     /**
-     * Set of possible characters an ID string can be built from
+     * Default set of possible characters an ID string can be built from.
      */
-    public static final char[] ID_CHARACTER_SET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    public static final char[]
+        DEFAULT_ID_CHARACTER_SET =
+        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+
+    /**
+     * Set of possible characters an ID string can be built from. Defaults to {@link IdGenerator#DEFAULT_ID_CHARACTER_SET}
+     * and can be overridden using the system property {@code codes.patrick.refinery.id-character-set}
+     */
+    public static final char[] ID_CHARACTER_SET;
+
+    /**
+     * Default length of an ID string
+     */
+    public static final int DEFAULT_ID_LENGTH = 16;
+
+    /**
+     * Length of an ID string if no length parameter is passed to {@link IdGenerator#getIdString(int)}. Must be greater
+     * than 0. Defaults to {@link IdGenerator#DEFAULT_ID_LENGTH} and can be overridden using the system property
+     * {@code codes.patrick.refinery.id-length}
+     */
+    public static final int ID_LENGTH;
+
+    static {
+        char[] idCharacterSet;
+        int idLength;
+        try {
+            final String value = System.getProperty("codes.patrick.refinery.id-character-set", null);
+            idCharacterSet = (value == null || value.isEmpty()) ? DEFAULT_ID_CHARACTER_SET : value.toCharArray();
+        } catch (final Exception err) {
+            // Set defaults if an error occurred reading system properties
+            idCharacterSet = DEFAULT_ID_CHARACTER_SET;
+        }
+
+        try {
+            final String value = System.getProperty("codes.patrick.refinery.id-length", null);
+            idLength = (value == null || value.isEmpty()) ? DEFAULT_ID_LENGTH : Integer.parseInt(value, 10);
+            if (idLength <= 0) {
+                idLength = DEFAULT_ID_LENGTH;
+            }
+        } catch (final Exception err) {
+            // Set defaults if an error occurred reading system properties
+            idLength = DEFAULT_ID_LENGTH;
+        }
+
+        ID_CHARACTER_SET = idCharacterSet;
+        ID_LENGTH = idLength;
+    }
+
+    /**
+     * Generate an ID string of length {@link IdGenerator#ID_LENGTH}
+     *
+     * @return An ID string
+     */
+    @NotNull
+    public static String getIdString() {
+        return getIdString(ID_LENGTH);
+    }
 
     /**
      * Generate an ID string of the specified length

@@ -26,9 +26,16 @@ import org.jetbrains.annotations.NotNull;
  * @author Patrick Lavigne
  */
 public class SourceFile extends FileInfo {
+    public SourceFile(@NotNull String name) {
+        super(name);
+    }
 
     public SourceFile(@NotNull String id, @NotNull String name) {
         super(id, name);
+    }
+
+    public SourceFile(@NotNull String name, @NotNull Metadata metadata) {
+        super(name, metadata);
     }
 
     public SourceFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {

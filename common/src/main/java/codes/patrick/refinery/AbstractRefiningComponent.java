@@ -20,39 +20,29 @@ package codes.patrick.refinery;
 
 import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * An ordered list of actions to perform on a {@link SourceFile}. A {@link Process} consists of one or more
- * {@link Step}s, which must be run serially
+ * Basic abstract implementation of {@link RefiningComponent}
  *
  * @author Patrick Lavigne
  */
-public class Process extends AbstractRefiningComponent {
-    private final List<Step> steps;
+public abstract class AbstractRefiningComponent implements RefiningComponent {
+    private final String id;
 
-    public Process() {
-        this(IdGenerator.getIdString(), null);
+    protected AbstractRefiningComponent() {
+        this(IdGenerator.getIdString());
     }
 
-    public Process(@Nullable final List<Step> steps) {
-        this(IdGenerator.getIdString(), steps);
-    }
-
-    public Process(@NotNull final String id, @Nullable final List<Step> steps) {
-        super(id);
-        this.steps = steps != null ? new CopyOnWriteArrayList<>(steps) : new CopyOnWriteArrayList<>();
+    protected AbstractRefiningComponent(@NotNull final String id) {
+        this.id = id;
     }
 
     /**
-     * Retrieve the list of {@link Step}s that make up this {@link Process}
-     * @return The {@link Step}s that make up this {@link Process}
+     * {@inheritDoc}
      */
     @NotNull
-    public List<Step> getSteps() {
-        return this.steps;
+    @Override
+    public String getId() {
+        return this.id;
     }
 }

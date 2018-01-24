@@ -18,10 +18,10 @@
 
 package codes.patrick.refinery;
 
+import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -32,22 +32,32 @@ import java.util.concurrent.CopyOnWriteArraySet;
  *
  * @author Patrick Lavigne
  */
-public class Step implements Serializable {
+public class Step extends AbstractRefiningComponent {
     private final Set<Task> tasks;
 
     /**
-     * Create an empty Step, without any {@link Task}s
+     * Create an empty Step, without any {@link Task Tasks}
      */
     public Step() {
-        this(null);
+        this(IdGenerator.getIdString(), null);
     }
 
     /**
-     * Create the Step with the given {@link Task}s. If null, create an empty Step
-     *
-     * @param tasks Collection of {@link Task}s that make up this Step, or null to create an empty Step
+     * Create the Step with the given {@link Task Tasks}. If null, create an empty Step
+     * @param tasks Collection of {@link Task Tasks} that make up this Step, or null to create an empty Step
      */
     public Step(@Nullable final Collection<Task> tasks) {
+        this(IdGenerator.getIdString(), tasks);
+    }
+
+    /**
+     * Create the Step with the given {@link Task Tasks} and ID. If null, create an empty Step
+     *
+     * @param id    Unique ID of this Step
+     * @param tasks Collection of {@link Task Tasks} that make up this Step, or null to create an empty Step
+     */
+    public Step(@NotNull final String id, @Nullable final Collection<Task> tasks) {
+        super(id);
         this.tasks = tasks != null ? new CopyOnWriteArraySet<>(tasks) : new CopyOnWriteArraySet<>();
     }
 
@@ -59,5 +69,10 @@ public class Step implements Serializable {
     @NotNull
     public Set<Task> getTasks() {
         return this.tasks;
+    }
+
+    @Override
+    public @NotNull String getId() {
+        return null;
     }
 }
