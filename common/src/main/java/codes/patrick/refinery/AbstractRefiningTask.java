@@ -18,13 +18,20 @@
 
 package codes.patrick.refinery;
 
-import java.io.Serializable;
+import codes.patrick.refinery.util.IdGenerator;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * A collection of metadata. Metadata can either be tied to a {@link SourceFile} or a {@link DerivedFile}
+ * Abstract base class to simplify building {@link RefiningTask RefiningTasks}
  *
  * @author Patrick Lavigne
  */
-public class Metadata implements Serializable {
+public abstract class AbstractRefiningTask extends AbstractRefiningComponent implements RefiningTask {
+    protected AbstractRefiningTask(@NotNull final String name) {
+        this(IdGenerator.getIdString(), name);
+    }
 
+    protected AbstractRefiningTask(@NotNull final String id, @NotNull final String name) {
+        super(id, name);
+    }
 }

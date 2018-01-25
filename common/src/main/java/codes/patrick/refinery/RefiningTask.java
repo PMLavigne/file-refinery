@@ -18,27 +18,16 @@
 
 package codes.patrick.refinery;
 
-import org.jetbrains.annotations.NotNull;
+import codes.patrick.refinery.fs.DerivedFile;
+import codes.patrick.refinery.fs.Metadata;
+import codes.patrick.refinery.fs.SourceFile;
 
 /**
- * The raw file being refined
+ * An action to apply to a {@link SourceFile}. RefiningTasks within the same {@link RefiningStep} may be executed in
+ * parallel or out of order. RefiningTasks can accept as input the {@link SourceFile}, any {@link DerivedFile}s that
+ * have been created in previous {@link RefiningStep RefiningSteps}, and all associated {@link Metadata}.
  *
  * @author Patrick Lavigne
  */
-public class SourceFile extends FileInfo {
-    public SourceFile(@NotNull String name) {
-        super(name);
-    }
-
-    public SourceFile(@NotNull String id, @NotNull String name) {
-        super(id, name);
-    }
-
-    public SourceFile(@NotNull String name, @NotNull Metadata metadata) {
-        super(name, metadata);
-    }
-
-    public SourceFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {
-        super(id, name, metadata);
-    }
+public interface RefiningTask extends RefiningComponent {
 }

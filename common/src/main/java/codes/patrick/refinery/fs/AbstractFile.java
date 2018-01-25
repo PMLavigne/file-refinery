@@ -16,7 +16,7 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+package codes.patrick.refinery.fs;
 
 import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -27,32 +27,33 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Patrick Lavigne
  */
-public abstract class FileInfo extends AbstractFilesystemObject {
-    protected FileInfo(@NotNull final String name) {
+public abstract class AbstractFile extends AbstractFilesystemObject {
+    protected AbstractFile(@NotNull final String name) {
         this(IdGenerator.getIdString(), name, new Metadata());
     }
 
-    protected FileInfo(@NotNull final String name, @NotNull final Metadata metadata) {
+    protected AbstractFile(@NotNull final String name, @NotNull final Metadata metadata) {
         this(IdGenerator.getIdString(), name, metadata);
     }
 
-    protected FileInfo(@NotNull final String id, @NotNull final String name) {
+    protected AbstractFile(@NotNull final String id, @NotNull final String name) {
         this(id, name, new Metadata());
     }
 
-    protected FileInfo(@NotNull final String id, @NotNull final String name, @NotNull final Metadata metadata) {
+    protected AbstractFile(@NotNull final String id, @NotNull final String name, @NotNull final Metadata metadata) {
         super(id, name, metadata);
     }
 
     /**
      * The file extension, not including the period. The default implementation returns anything after the final period
      * in the value returned by {@link #getName()}.
+     *
      * @return The file extension, or null if none
      */
     @Nullable
     public String getExtension() {
         final String name = getName();
         final int periodPos = name.lastIndexOf('.');
-        return periodPos < 0 ? null : name.substring(periodPos+1);
+        return periodPos < 0 ? null : name.substring(periodPos + 1);
     }
 }

@@ -16,10 +16,15 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+package codes.patrick.refinery.fs;
 
 import java.io.Serializable;
 
-public class DirectoryInfo implements Serializable {
+/**
+ * A collection of metadata. Metadata can be tied to any
+ *
+ * @author Patrick Lavigne
+ */
+public class Metadata implements Serializable {
 
 }

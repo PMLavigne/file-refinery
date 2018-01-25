@@ -16,14 +16,30 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+package codes.patrick.refinery.fs;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
- * An action to apply to a {@link SourceFile}. Tasks within the same {@link Step} may be executed in parallel
- * or out of order. Tasks can accept as input the {@link SourceFile}, any {@link DerivedFile}s that have been
- * created in previous {@link Step}s, and all associated {@link Metadata}.
+ * A file that has been derived by refining a {@link SourceFile}, either directly from the {@link SourceFile} or from
+ * a different intermediate {@link DerivedFile}.
  *
  * @author Patrick Lavigne
  */
-public interface Task extends RefiningComponent {
+public class DerivedFile extends AbstractFile {
+    public DerivedFile(@NotNull String name) {
+        super(name);
+    }
+
+    public DerivedFile(@NotNull String id, @NotNull String name) {
+        super(id, name);
+    }
+
+    public DerivedFile(@NotNull String name, @NotNull Metadata metadata) {
+        super(name, metadata);
+    }
+
+    public DerivedFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {
+        super(id, name, metadata);
+    }
 }

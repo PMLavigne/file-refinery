@@ -16,30 +16,8 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+@XmlAccessorType(XmlAccessType.PROPERTY)
+package codes.patrick.refinery.fs;
 
-import org.jetbrains.annotations.NotNull;
-
-/**
- * A file that has been derived by refining a {@link SourceFile}, either directly from the {@link SourceFile} or from
- * a different intermediate {@link DerivedFile}.
- *
- * @author Patrick Lavigne
- */
-public class DerivedFile extends FileInfo {
-    public DerivedFile(@NotNull String name) {
-        super(name);
-    }
-
-    public DerivedFile(@NotNull String id, @NotNull String name) {
-        super(id, name);
-    }
-
-    public DerivedFile(@NotNull String name, @NotNull Metadata metadata) {
-        super(name, metadata);
-    }
-
-    public DerivedFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {
-        super(id, name, metadata);
-    }
-}
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;

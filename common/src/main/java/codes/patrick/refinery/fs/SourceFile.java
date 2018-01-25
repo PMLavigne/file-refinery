@@ -16,34 +16,29 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+package codes.patrick.refinery.fs;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
-
 /**
- * A part of the refining system itself, for example a {@link RefiningProcess} or {@link RefiningTask}
+ * The raw file being refined
  *
  * @author Patrick Lavigne
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public interface RefiningComponent extends Serializable {
-    /**
-     * A unique ID that identifies this component in the refinery system.
-     *
-     * @return An ID that is unique to this component
-     * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
-     */
-    @NotNull
-    String getId();
+public class SourceFile extends AbstractFile {
+    public SourceFile(@NotNull String name) {
+        super(name);
+    }
 
-    /**
-     * A name for this component. Names are printed to logs and used to aid debugging, so use something meaningful.
-     *
-     * @return This component's name
-     */
-    @NotNull
-    String getName();
+    public SourceFile(@NotNull String id, @NotNull String name) {
+        super(id, name);
+    }
+
+    public SourceFile(@NotNull String name, @NotNull Metadata metadata) {
+        super(name, metadata);
+    }
+
+    public SourceFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {
+        super(id, name, metadata);
+    }
 }

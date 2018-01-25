@@ -18,6 +18,7 @@
 
 package codes.patrick.refinery;
 
+import codes.patrick.refinery.fs.SourceFile;
 import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,33 +27,35 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * An ordered list of actions to perform on a {@link SourceFile}. A {@link Process} consists of one or more
- * {@link Step}s, which must be run serially
+ * An ordered list of actions to perform on a {@link SourceFile}. A {@link RefiningProcess} consists of one or more
+ * {@link RefiningStep RefiningSteps}, which must be run serially
  *
  * @author Patrick Lavigne
  */
-public class Process extends AbstractRefiningComponent {
-    private final List<Step> steps;
+public class RefiningProcess extends AbstractRefiningComponent {
+    private final List<RefiningStep> steps;
 
-    public Process() {
-        this(IdGenerator.getIdString(), null);
+    public RefiningProcess(@NotNull final String name) {
+        this(IdGenerator.getIdString(), name, null);
     }
 
-    public Process(@Nullable final List<Step> steps) {
-        this(IdGenerator.getIdString(), steps);
+    public RefiningProcess(@NotNull final String name, @Nullable final List<RefiningStep> steps) {
+        this(IdGenerator.getIdString(), name, steps);
     }
 
-    public Process(@NotNull final String id, @Nullable final List<Step> steps) {
-        super(id);
+    public RefiningProcess(@NotNull final String id,
+                           @NotNull final String name,
+                           @Nullable final List<RefiningStep> steps) {
+        super(id, name);
         this.steps = steps != null ? new CopyOnWriteArrayList<>(steps) : new CopyOnWriteArrayList<>();
     }
 
     /**
-     * Retrieve the list of {@link Step}s that make up this {@link Process}
-     * @return The {@link Step}s that make up this {@link Process}
+     * Retrieve the list of {@link RefiningStep RefiningSteps} that make up this {@link RefiningProcess}
+     * @return The {@link RefiningStep RefiningSteps} that make up this {@link RefiningProcess}
      */
     @NotNull
-    public List<Step> getSteps() {
+    public List<RefiningStep> getSteps() {
         return this.steps;
     }
 }

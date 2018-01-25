@@ -16,7 +16,7 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery;
+package codes.patrick.refinery.fs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.jetbrains.annotations.NotNull;
@@ -24,26 +24,36 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 
 /**
- * A part of the refining system itself, for example a {@link RefiningProcess} or {@link RefiningTask}
+ * Abstract representation of a filesystem object (generally a directory or file of some type) in the refinery's virtual
+ * filesystem. For refining purposes, a filesystem object has a unique ID, a name, and associated {@link Metadata}
  *
  * @author Patrick Lavigne
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public interface RefiningComponent extends Serializable {
+public interface FilesystemObject extends Serializable {
     /**
-     * A unique ID that identifies this component in the refinery system.
+     * A unique ID that identifies this filesystem object in the refinery system. An ID corresponding to a filesystem
+     * object must remain the same through the entire refining process.
      *
-     * @return An ID that is unique to this component
+     * @return An ID that is unique to this filesystem object
      * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
      */
     @NotNull
     String getId();
 
     /**
-     * A name for this component. Names are printed to logs and used to aid debugging, so use something meaningful.
+     * The name of the filesystem object
      *
-     * @return This component's name
+     * @return The name of the filesystem object
      */
     @NotNull
     String getName();
+
+    /**
+     * The collection of {@link Metadata metadata} pertaining to this filesystem object
+     *
+     * @return This filesystem object's metadata
+     */
+    @NotNull
+    Metadata getMetadata();
 }
