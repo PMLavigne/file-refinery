@@ -363,5 +363,14 @@
     <module name="ParameterAssignment"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
+
+    <!-- Checkstyle-Addons -->
+    <module name="LocationReference">
+      <property name="methodCalls" value="LoggerFactory.getLogger"/>
+      <property name="location" value="ClassObject"/>
+      <message key="locationreference.mismatch.classobject"
+               value="Logger must reference the class where the logger is being instantiated: '{0}'"/>
+    </module>
+    <module name="LostInstance"/>
   </module>
 </module>
