@@ -17,7 +17,7 @@
  */
 
 /**
- * Refinery system setup and configuration structures, and associated processing.
+ * Refinery system configuration structures and associated processing.
  *
  * @author Patrick Lavigne
  */
