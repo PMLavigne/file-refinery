@@ -16,6 +16,11 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Base package of the system. Contains the basic building blocks of the Refinery.
+ *
+ * @author Patrick Lavigne
+ */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 package codes.patrick.refinery;
 
