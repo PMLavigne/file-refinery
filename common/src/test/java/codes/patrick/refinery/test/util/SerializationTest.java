@@ -18,7 +18,7 @@
 
 package codes.patrick.refinery.test.util;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -29,13 +29,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 import codes.patrick.refinery.test.TestBase;
 import codes.patrick.refinery.util.Serialization;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SerializationTest extends TestBase {
 
@@ -45,41 +51,53 @@ class SerializationTest extends TestBase {
     final String result = Serialization.serialize(testObject);
     assertNotNull(result);
     assertFalse(result.trim().isEmpty());
-    assertEquals(result, "{\n"
-      + "  \"name\" : \"SerializationTest-testSerializeBasic\"\n"
-      + "}");
+    assertEquals(result, "{\n  \"name\" : \"SerializationTest-testSerializeBasic\"\n}");
   }
 
   @Test
   void testSerializeRecursive() throws JsonProcessingException {
-    final SerializationTestObject testObject = new SerializationTestObject("SerializationTest-testSerializeRecursive",
-      Arrays.asList(new SerializationTestObject[]{
-        new SerializationTestSubObject("SerializationTest-testSerializeRecursive-sub1")
-      }));
+    final SerializationTestObject testObject =
+      new SerializationTestObject("SerializationTest-testSerializeRecursive");
+    testObject.getChildren()
+      .add(new SerializationTestSubObject("SerializationTest-testSerializeRecursive-sub1", testObject));
+    final SerializationTestSubObject sub2 = new SerializationTestSubObject(
+      "SerializationTest-testSerializeRecursive-sub2", testObject);
+    testObject.getChildren().add(sub2);
+    sub2.getChildren()
+      .add(new SerializationTestSubObject("SerializationTest-testSerializeRecursive-sub3", sub2));
     final String result = Serialization.serialize(testObject);
     assertNotNull(result);
     assertFalse(result.trim().isEmpty());
   }
 
   @Test
-  void testDeserialize() {
-    fail("Test not implemented");
+  void testDeserializeBasic() throws IOException {
+    final String json = "{\n  \"name\" : \"SerializationTest-testDeserializeBasic\"\n}";
+    final SerializationTestObject result = Serialization.deserialize(json, SerializationTestObject.class);
+    assertNotNull(result);
+    assertEquals("SerializationTest-testDeserializeBasic", result.getName());
+    assertTrue(result.getChildren().isEmpty());
   }
 
   @XmlRootElement
   @XmlAccessorType(XmlAccessType.FIELD)
-  class SerializationTestObject {
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  static class SerializationTestObject {
     private final String name;
 
-    @JsonBackReference
+    @JsonManagedReference
+    @JsonProperty("children")
     private final Set<SerializationTestObject> children;
 
     SerializationTestObject(@Nullable final String name) {
       this(name, null);
     }
 
-    SerializationTestObject(@Nullable final String name,
-                            @Nullable final Collection<SerializationTestObject> children) {
+    @JsonCreator
+    SerializationTestObject(@Nullable
+                            @JsonProperty(required = true, value = "name") final String name,
+                            @Nullable
+                            @JsonProperty("children") final Collection<SerializationTestObject> children) {
       this.name = name;
       this.children = children == null ? new CopyOnWriteArraySet<>() : new CopyOnWriteArraySet<>(children);
     }
@@ -103,23 +121,27 @@ class SerializationTest extends TestBase {
 
   @XmlRootElement
   @XmlAccessorType(XmlAccessType.FIELD)
-  class SerializationTestSubObject extends SerializationTestObject {
-    @JsonManagedReference
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  static class SerializationTestSubObject extends SerializationTestObject {
+
+    @JsonBackReference
+    @JsonProperty("parent")
     private final SerializationTestObject parent;
 
-    SerializationTestSubObject(@Nullable final String name) {
-      this(name, null, null);
-    }
-
-    SerializationTestSubObject(@Nullable final String name,
-                               @Nullable final SerializationTestObject parent) {
+    SerializationTestSubObject(@Nullable
+                               @JsonProperty(required = true, value = "name") final String name,
+                               @NotNull
+                               @JsonProperty(required = true, value = "parent") final SerializationTestObject parent) {
       this(name, parent, null);
-
     }
 
-    SerializationTestSubObject(@Nullable final String name,
-                               @Nullable final SerializationTestObject parent,
-                               @Nullable final Collection<SerializationTestObject> children) {
+    @JsonCreator
+    SerializationTestSubObject(@Nullable
+                               @JsonProperty(required = true, value = "name") final String name,
+                               @NotNull
+                               @JsonProperty(required = true, value = "parent") final SerializationTestObject parent,
+                               @Nullable
+                               @JsonProperty("children") final Collection<SerializationTestObject> children) {
       super(name, children);
       this.parent = parent;
     }
