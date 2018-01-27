@@ -22,9 +22,7 @@
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <charset>utf-8</charset>
-      <Pattern>%nopex%highlight(%-5level) %white(%d{HH:mm:ss.SSS}) %-84(%magenta(%-15.15thread) %cyan(%logger)) ├
-        %msg%n%highlight(%ex{full})
-      </Pattern>
+      <Pattern>%nopex%highlight(%-5level) %white(%d{HH:mm:ss.SSS}) %-84(%magenta(%-15.15thread) %cyan(%logger)) ├ %msg%n%highlight(%ex{full})</Pattern>
     </encoder>
   </appender>
 
