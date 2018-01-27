@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Patrick Lavigne
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface FilesystemObject extends Serializable {
   /**
    * A unique ID that identifies this filesystem object in the refinery system. An ID corresponding to a filesystem
