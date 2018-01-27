@@ -16,31 +16,33 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery.util;
+package codes.patrick.refinery.test.util;
 
 import codes.patrick.refinery.test.TestBase;
+import codes.patrick.refinery.util.IdGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class IdGeneratorTest extends TestBase {
+  private static final int LONG_ID_TEST_LENGTH = 500;
 
-    @Test
-    void testGetIdString() {
-        // Verify it returns "" for anything 0 or less
-        String testId = IdGenerator.getIdString(-1);
-        assertTrue(testId.isEmpty());
-        testId = IdGenerator.getIdString(0);
-        assertTrue(testId.isEmpty());
+  @Test
+  void testGetIdString() {
+    // Verify it returns "" for anything 0 or less
+    String testId = IdGenerator.getIdString(-1);
+    assertTrue(testId.isEmpty());
+    testId = IdGenerator.getIdString(0);
+    assertTrue(testId.isEmpty());
 
-        // Verify length
-        testId = IdGenerator.getIdString(1);
-        assertEquals(1, testId.length());
-        testId = IdGenerator.getIdString(500);
-        assertEquals(500, testId.length());
+    // Verify length
+    testId = IdGenerator.getIdString(1);
+    assertEquals(1, testId.length());
+    testId = IdGenerator.getIdString(LONG_ID_TEST_LENGTH);
+    assertEquals(LONG_ID_TEST_LENGTH, testId.length());
 
-        // Check if ID's are actually different
-        String compareId = IdGenerator.getIdString(500);
-        assertNotEquals(testId, compareId);
-    }
+    // Check if ID's are actually different
+    final String compareId = IdGenerator.getIdString(LONG_ID_TEST_LENGTH);
+    assertNotEquals(testId, compareId);
+  }
 }

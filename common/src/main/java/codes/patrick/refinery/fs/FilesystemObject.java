@@ -18,10 +18,10 @@
 
 package codes.patrick.refinery.fs;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.Serializable;
 
 /**
  * Abstract representation of a filesystem object (generally a directory or file of some type) in the refinery's virtual
@@ -31,29 +31,29 @@ import java.io.Serializable;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public interface FilesystemObject extends Serializable {
-    /**
-     * A unique ID that identifies this filesystem object in the refinery system. An ID corresponding to a filesystem
-     * object must remain the same through the entire refining process.
-     *
-     * @return An ID that is unique to this filesystem object
-     * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
-     */
-    @NotNull
-    String getId();
+  /**
+   * A unique ID that identifies this filesystem object in the refinery system. An ID corresponding to a filesystem
+   * object must remain the same through the entire refining process.
+   *
+   * @return An ID that is unique to this filesystem object
+   * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
+   */
+  @NotNull
+  String getId();
 
-    /**
-     * The name of the filesystem object
-     *
-     * @return The name of the filesystem object
-     */
-    @NotNull
-    String getName();
+  /**
+   * The name of the filesystem object.
+   *
+   * @return The name of the filesystem object
+   */
+  @NotNull
+  String getName();
 
-    /**
-     * The collection of {@link Metadata metadata} pertaining to this filesystem object
-     *
-     * @return This filesystem object's metadata
-     */
-    @NotNull
-    Metadata getMetadata();
+  /**
+   * The collection of {@link Metadata metadata} pertaining to this filesystem object.
+   *
+   * @return This filesystem object's metadata
+   */
+  @NotNull
+  Metadata getMetadata();
 }

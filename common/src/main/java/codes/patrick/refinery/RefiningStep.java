@@ -18,13 +18,13 @@
 
 package codes.patrick.refinery;
 
-import codes.patrick.refinery.util.IdGenerator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+
+import codes.patrick.refinery.util.IdGenerator;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A single stage of a {@link RefiningProcess}. They are run serially. Within each RefiningStep is one or more
@@ -33,51 +33,52 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @author Patrick Lavigne
  */
 public class RefiningStep extends AbstractRefiningComponent {
-    private final Set<RefiningTask> tasks;
+  private final Set<RefiningTask> tasks;
 
-    /**
-     * Create an empty RefiningStep, without any {@link RefiningTask RefiningTasks}
-     *
-     * @param name  Name of this Step
-     */
-    public RefiningStep(@NotNull final String name) {
-        this(IdGenerator.getIdString(), name, null);
-    }
+  /**
+   * Create an empty RefiningStep, without any {@link RefiningTask RefiningTasks}.
+   *
+   * @param name Name of this Step
+   */
+  public RefiningStep(@NotNull final String name) {
+    this(IdGenerator.getIdString(), name, null);
+  }
 
-    /**
-     * Create the RefiningStep with the given {@link RefiningTask RefiningTasks}. If null, create an empty RefiningStep
-     *
-     * @param name  Name of this Step
-     * @param tasks Collection of {@link RefiningTask RefiningTasks} that make up this RefiningStep, or null to create
-     *              an empty RefiningStep
-     */
-    public RefiningStep(@NotNull final String name, @Nullable final Collection<RefiningTask> tasks) {
-        this(IdGenerator.getIdString(), name, tasks);
-    }
+  /**
+   * Create the RefiningStep with the given {@link RefiningTask RefiningTasks}. If null, create an empty RefiningStep
+   *
+   * @param name  Name of this Step
+   * @param tasks Collection of {@link RefiningTask RefiningTasks} that make up this RefiningStep, or null to create
+   *              an empty RefiningStep
+   */
+  public RefiningStep(@NotNull final String name, @Nullable final Collection<RefiningTask> tasks) {
+    this(IdGenerator.getIdString(), name, tasks);
+  }
 
-    /**
-     * Create the RefiningStep with the given {@link RefiningTask RefiningTasks} and ID. If null, create an empty
-     * RefiningStep
-     *
-     * @param id    Unique ID of this RefiningStep
-     * @param name  Name of this RefiningStep
-     * @param tasks Collection of {@link RefiningTask RefiningTasks} that make up this RefiningStep, or null to create
-     *              an empty RefiningStep
-     */
-    public RefiningStep(@NotNull final String id,
-                        @NotNull final String name,
-                        @Nullable final Collection<RefiningTask> tasks) {
-        super(id, name);
-        this.tasks = tasks != null ? new CopyOnWriteArraySet<>(tasks) : new CopyOnWriteArraySet<>();
-    }
+  /**
+   * Create the RefiningStep with the given {@link RefiningTask RefiningTasks} and ID. If null, create an empty
+   * RefiningStep
+   *
+   * @param id    Unique ID of this RefiningStep
+   * @param name  Name of this RefiningStep
+   * @param tasks Collection of {@link RefiningTask RefiningTasks} that make up this RefiningStep, or null to create
+   *              an empty RefiningStep
+   */
+  public RefiningStep(@NotNull final String id,
+                      @NotNull final String name,
+                      @Nullable final Collection<RefiningTask> tasks) {
+    super(id, name);
+    this.tasks = tasks != null ? new CopyOnWriteArraySet<>(tasks) : new CopyOnWriteArraySet<>();
+  }
 
-    /**
-     * Get the {@link RefiningTask Tasks} that are to be done during this RefiningStep. {@link RefiningTask Tasks} may
-     * be executed in parallel or out of order
-     * @return The collection of {@link RefiningTask Tasks} that will be done for this RefiningStep
-     */
-    @NotNull
-    public Set<RefiningTask> getTasks() {
-        return this.tasks;
-    }
+  /**
+   * Get the {@link RefiningTask Tasks} that are to be done during this RefiningStep. {@link RefiningTask Tasks} may
+   * be executed in parallel or out of order
+   *
+   * @return The collection of {@link RefiningTask Tasks} that will be done for this RefiningStep
+   */
+  @NotNull
+  public Set<RefiningTask> getTasks() {
+    return this.tasks;
+  }
 }

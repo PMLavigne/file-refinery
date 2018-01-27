@@ -21,9 +21,9 @@ package codes.patrick.refinery.test;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 public class TestBase {
-    // Set up logging for tests
-    static {
-        SLF4JBridgeHandler.removeHandlersForRootLogger();
-        SLF4JBridgeHandler.install();
-    }
+  // Set up logging for tests
+  static {
+    SLF4JBridgeHandler.removeHandlersForRootLogger();
+    SLF4JBridgeHandler.install();
+  }
 }

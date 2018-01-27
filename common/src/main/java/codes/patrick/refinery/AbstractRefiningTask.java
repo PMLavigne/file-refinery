@@ -22,16 +22,16 @@ import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Abstract base class to simplify building {@link RefiningTask RefiningTasks}
+ * Abstract base class to simplify building {@link RefiningTask RefiningTasks}.
  *
  * @author Patrick Lavigne
  */
 public abstract class AbstractRefiningTask extends AbstractRefiningComponent implements RefiningTask {
-    protected AbstractRefiningTask(@NotNull final String name) {
-        this(IdGenerator.getIdString(), name);
-    }
+  protected AbstractRefiningTask(@NotNull final String name) {
+    this(IdGenerator.getIdString(), name);
+  }
 
-    protected AbstractRefiningTask(@NotNull final String id, @NotNull final String name) {
-        super(id, name);
-    }
+  protected AbstractRefiningTask(@NotNull final String id, @NotNull final String name) {
+    super(id, name);
+  }
 }

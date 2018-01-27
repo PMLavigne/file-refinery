@@ -18,27 +18,55 @@
 
 package codes.patrick.refinery.fs;
 
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * The raw file being refined
+ * The raw file being refined.
  *
  * @author Patrick Lavigne
  */
 public class SourceFile extends AbstractFile {
-    public SourceFile(@NotNull String name) {
-        super(name);
-    }
+  public SourceFile(@NotNull final String name) {
+    this(null, name, null, null);
+  }
 
-    public SourceFile(@NotNull String id, @NotNull String name) {
-        super(id, name);
-    }
+  public SourceFile(@NotNull final String name, @Nullable final Set<DerivedFile> derivedFiles) {
+    this(null, name, null, derivedFiles);
+  }
 
-    public SourceFile(@NotNull String name, @NotNull Metadata metadata) {
-        super(name, metadata);
-    }
+  public SourceFile(@Nullable final String id, @NotNull final String name) {
+    this(id, name, null, null);
+  }
 
-    public SourceFile(@NotNull String id, @NotNull String name, @NotNull Metadata metadata) {
-        super(id, name, metadata);
-    }
+  public SourceFile(@Nullable final String id,
+                    @NotNull final String name,
+                    @Nullable final Set<DerivedFile> derivedFiles) {
+    this(id, name, null, derivedFiles);
+  }
+
+  public SourceFile(@NotNull final String name, @Nullable final Metadata metadata) {
+    this(null, name, metadata, null);
+  }
+
+  public SourceFile(@Nullable final String id,
+                    @NotNull final String name,
+                    @Nullable final Metadata metadata,
+                    @Nullable final Set<DerivedFile> derivedFiles) {
+    super(id, name, metadata, derivedFiles);
+  }
+
+  /**
+   * Implementation of {@link AbstractFile#getParentFile()} that just returns null, because SourceFiles are originals
+   * and as a result don't have parents.
+   *
+   * @return Always returns null
+   */
+  @Override
+  @Nullable
+  public AbstractFile getParentFile() {
+    return null;
+  }
 }

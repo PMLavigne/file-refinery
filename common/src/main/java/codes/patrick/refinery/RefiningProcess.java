@@ -18,44 +18,68 @@
 
 package codes.patrick.refinery;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import codes.patrick.refinery.fs.SourceFile;
 import codes.patrick.refinery.util.IdGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 /**
  * An ordered list of actions to perform on a {@link SourceFile}. A {@link RefiningProcess} consists of one or more
- * {@link RefiningStep RefiningSteps}, which must be run serially
+ * {@link RefiningStep RefiningSteps}, which must be run serially.
  *
  * @author Patrick Lavigne
  */
 public class RefiningProcess extends AbstractRefiningComponent {
-    private final List<RefiningStep> steps;
+  private final List<RefiningStep> steps;
 
-    public RefiningProcess(@NotNull final String name) {
-        this(IdGenerator.getIdString(), name, null);
-    }
+  /**
+   * Create a RefiningProcess with the specified name and an empty list of {@link RefiningStep Steps}. The ID will
+   * be generated automatically by {@link IdGenerator#getIdString()}.
+   *
+   * @param name Name of the refining process to create.
+   */
+  public RefiningProcess(@NotNull final String name) {
+    this(null, name, null);
+  }
 
-    public RefiningProcess(@NotNull final String name, @Nullable final List<RefiningStep> steps) {
-        this(IdGenerator.getIdString(), name, steps);
-    }
+  /**
+   * Create a RefiningProcess with the specified name, and optionally a list of {@link RefiningStep Steps}. The ID will
+   * be generated automatically by {@link IdGenerator#getIdString()}.
+   *
+   * @param name  Name of the refining process to create.
+   * @param steps List of {@link RefiningStep Steps} that are executed in this process. If null, an empty list will be
+   *              created.
+   */
+  public RefiningProcess(@NotNull final String name, @Nullable final List<RefiningStep> steps) {
+    this(null, name, steps);
+  }
 
-    public RefiningProcess(@NotNull final String id,
-                           @NotNull final String name,
-                           @Nullable final List<RefiningStep> steps) {
-        super(id, name);
-        this.steps = steps != null ? new CopyOnWriteArrayList<>(steps) : new CopyOnWriteArrayList<>();
-    }
+  /**
+   * Create a RefiningProcess with the specified name, and optionally a specified unique ID and list of
+   * {@link RefiningStep Steps}.
+   *
+   * @param id    Unique ID of the component. If null, use {@link IdGenerator#getIdString()} to generate one.
+   * @param name  Name of the refining process to create.
+   * @param steps List of {@link RefiningStep Steps} that are executed in this process. If null, an empty list will be
+   *              created.
+   */
+  public RefiningProcess(@Nullable final String id,
+                         @NotNull final String name,
+                         @Nullable final List<RefiningStep> steps) {
+    super(id, name);
+    this.steps = steps != null ? new CopyOnWriteArrayList<>(steps) : new CopyOnWriteArrayList<>();
+  }
 
-    /**
-     * Retrieve the list of {@link RefiningStep RefiningSteps} that make up this {@link RefiningProcess}
-     * @return The {@link RefiningStep RefiningSteps} that make up this {@link RefiningProcess}
-     */
-    @NotNull
-    public List<RefiningStep> getSteps() {
-        return this.steps;
-    }
+  /**
+   * Retrieve the list of {@link RefiningStep RefiningSteps} that make up this {@link RefiningProcess}.
+   *
+   * @return The {@link RefiningStep RefiningSteps} that make up this {@link RefiningProcess}
+   */
+  @NotNull
+  public List<RefiningStep> getSteps() {
+    return this.steps;
+  }
 }

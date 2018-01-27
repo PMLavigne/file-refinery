@@ -18,14 +18,14 @@
 
 package codes.patrick.refinery.conf;
 
-import codes.patrick.refinery.RefiningProcess;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+
+import codes.patrick.refinery.RefiningProcess;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 /**
  * Definition of a {@link RefiningProcess}. Used to set up and configure the refinery pipeline. Generally this would be
@@ -36,7 +36,7 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RefiningProcessDefinition implements Serializable {
-    @JsonProperty(value = "name")
-    @JsonPropertyDescription("Name of the process. Mainly used in logging and debugging")
-    private String name;
+  @JsonProperty(value = "name")
+  @JsonPropertyDescription("Name of the process. Mainly used in logging and debugging")
+  private String name;
 }

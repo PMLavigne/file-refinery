@@ -18,14 +18,13 @@
 
 package codes.patrick.refinery.conf;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 /**
  * Definition of a {@link codes.patrick.refinery.RefiningStep}. Used to set up and configure the refinery pipeline.
@@ -36,7 +35,7 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RefiningStepDefinition implements Serializable {
-    @JsonProperty(value = "name")
-    @JsonPropertyDescription("Name of the step. Mainly used in logging and debugging")
-    private String name;
+  @JsonProperty(value = "name")
+  @JsonPropertyDescription("Name of the step. Mainly used in logging and debugging")
+  private String name;
 }

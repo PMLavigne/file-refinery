@@ -16,7 +16,12 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@XmlAccessorType(XmlAccessType.PROPERTY)
+/**
+ * Types defining and manipulating the refinery's virtual filesystem.
+ *
+ * @author Patrick Lavigne
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
 package codes.patrick.refinery.fs;
 
 import javax.xml.bind.annotation.XmlAccessType;

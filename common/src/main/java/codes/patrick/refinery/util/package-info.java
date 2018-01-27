@@ -16,27 +16,9 @@
  * License along with file-refinery.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package codes.patrick.refinery.fs;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 /**
- * Abstract representation of a directory in the refinery's virtual filesystem.
+ * Static utility classes that don't fit elsewhere.
  *
  * @author Patrick Lavigne
  */
-public class Directory extends AbstractFilesystemObject {
-
-  protected Directory(final @NotNull String name) {
-    this(null, name, null);
-  }
-
-  protected Directory(final @NotNull String name, final @Nullable Metadata metadata) {
-    this(null, name, null);
-  }
-
-  protected Directory(final @Nullable String id, final @NotNull String name, final @Nullable Metadata metadata) {
-    super(id, name, metadata);
-  }
-}
+package codes.patrick.refinery.util;

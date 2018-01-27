@@ -18,32 +18,32 @@
 
 package codes.patrick.refinery;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
-
 /**
- * A part of the refining system itself, for example a {@link RefiningProcess} or {@link RefiningTask}
+ * A part of the refining system itself, for example a {@link RefiningProcess} or {@link RefiningTask}.
  *
  * @author Patrick Lavigne
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public interface RefiningComponent extends Serializable {
-    /**
-     * A unique ID that identifies this component in the refinery system.
-     *
-     * @return An ID that is unique to this component
-     * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
-     */
-    @NotNull
-    String getId();
+  /**
+   * A unique ID that identifies this component in the refinery system.
+   *
+   * @return An ID that is unique to this component
+   * @see codes.patrick.refinery.util.IdGenerator#getIdString IdGenerator.getIdString() for generating unique ID's
+   */
+  @NotNull
+  String getId();
 
-    /**
-     * A name for this component. Names are printed to logs and used to aid debugging, so use something meaningful.
-     *
-     * @return This component's name
-     */
-    @NotNull
-    String getName();
+  /**
+   * A name for this component. Names are printed to logs and used to aid debugging, so use something meaningful.
+   *
+   * @return This component's name
+   */
+  @NotNull
+  String getName();
 }
