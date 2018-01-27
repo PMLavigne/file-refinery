@@ -12,6 +12,7 @@
         <entry key="scan-before-checkin" value="false" />
         <entry key="scanscope" value="AllSourcesWithTests" />
         <entry key="suppress-errors" value="false" />
+        <entry key="thirdparty-classpath" value="$PRJ_DIR$/.idea/checkstyle-libs/checkstyle-addons-5.2.0-all.jar" />
       </map>
     </option>
   </component>
