@@ -61,14 +61,6 @@
     </build>
 
     <dependencies>
-      <!-- Checkstyle -->
-      <dependency>
-        <groupId>com.puppycrawl.tools</groupId>
-        <artifactId>checkstyle</artifactId>
-        <version>8.7</version>
-        <scope>test</scope>
-      </dependency>
-
       <!-- Jackson Core and Annotations, needed for annotating types to assist serialization -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
